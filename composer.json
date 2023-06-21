@@ -1,4 +1,6 @@
 {
+	"name": "artekz/mongodb-example",
+    "description": "Examlpe symfony app with mongodb usage",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
