@@ -1,0 +1,7 @@
+index:
+    path: /
+    controller: App\Controller\IndexController::index
+
+import:
+    path: /import
+    controller: App\Controller\IndexController::import

@@ -1,0 +1,35 @@
+version: '3.5'
+
+networks:
+  mongodb-network:
+    driver: bridge
+
+services:
+  php:
+    build: ./docker/php
+    volumes:
+    - .:/var/www/html
+    working_dir: /var/www/html
+    networks:
+    - mongodb-network
+
+  nginx:
+    image: nginx:stable
+    ports:
+    - 80:80
+    volumes:
+    - .:/var/www/html
+    - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+    - mongodb-network
+
+  mongodb:
+    image: bitnami/mongodb:latest
+    ports:
+    - 27017:27017
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MONGODB_DATABASE=books_db
+      - MONGODB_EXTRA_FLAGS=--wiredTigerCacheSizeGB=2
+    networks:
+    - mongodb-network
